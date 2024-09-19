@@ -2,9 +2,7 @@ package com.stringconcat.marsrover
 
 import com.stringconcat.marsrover.Direction.*
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import javax.swing.text.html.HTML.Attribute.N
 
 class RoverTest {
 
@@ -42,5 +40,33 @@ class RoverTest {
         val rover = Rover(0, 0, SOUTH)
         rover.turnLeft()
         rover.direction shouldBe EAST
+    }
+
+    @Test
+    fun `when north rover turn right then the direction is East`() {
+        val rover = Rover(0, 0, NORTH)
+        rover.turnRight()
+        rover.direction shouldBe EAST
+    }
+
+    @Test
+    fun `when east rover turn right then the direction is South`() {
+        val rover = Rover(0, 0, EAST)
+        rover.turnRight()
+        rover.direction shouldBe SOUTH
+    }
+
+    @Test
+    fun `when south rover turn right then the direction is West`() {
+        val rover = Rover(0, 0, SOUTH)
+        rover.turnRight()
+        rover.direction shouldBe WEST
+    }
+
+    @Test
+    fun `when west rover turn right then the direction is North`() {
+        val rover = Rover(0, 0, WEST)
+        rover.turnRight()
+        rover.direction shouldBe NORTH
     }
 }
