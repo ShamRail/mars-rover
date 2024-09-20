@@ -8,13 +8,17 @@ class Rover(
 
     var coordinate = Coordinate(x, y)
 
-    fun move() {
-        coordinate = when (direction) {
+    fun nextCoordinate(): Coordinate {
+        return when (direction) {
             Direction.SOUTH -> coordinate.decY()
             Direction.NORTH -> coordinate.incY()
             Direction.EAST -> coordinate.incX()
             Direction.WEST -> coordinate.decX()
         }
+    }
+
+    fun move() {
+        coordinate = nextCoordinate()
     }
 
     fun turnLeft() {

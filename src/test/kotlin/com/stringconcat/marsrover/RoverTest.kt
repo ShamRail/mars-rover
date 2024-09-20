@@ -69,4 +69,12 @@ class RoverTest {
         rover.turnRight()
         rover.direction shouldBe NORTH
     }
+
+    @Test
+    fun `when call next coordinate then returns new coordinate without moving`() {
+        val rover = Rover(0, 0, EAST)
+        val nextCoordinate = rover.nextCoordinate()
+        nextCoordinate shouldBe Coordinate(1, 0)
+        rover.coordinate shouldBe Coordinate(0, 0)
+    }
 }
