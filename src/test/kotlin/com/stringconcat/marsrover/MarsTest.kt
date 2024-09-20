@@ -1,6 +1,7 @@
 package com.stringconcat.marsrover
 
 import arrow.core.getOrElse
+import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.shouldBe
 
@@ -8,36 +9,27 @@ import org.junit.jupiter.api.Test
 
 class MarsTest {
 
-//    /*
-//    Пример тестового ввода:
-//5 5 ← верхний правый угол плато
-//1 2 N ← текущее положение и направление камеры первого марсохода
-//LMLMLMLMM ← управление положением первого марсохода
-//3 3 E ← текущее положение и направление камеры второго марсохода
-//MMRMMRMRRM ← управление положением второго марсохода
-//
-//Пример тестового вывода:
-//1 3 N ← конечное положение и направление камеры первого марсохода
-//5 1 E ← конечное положение и направление камеры второго марсохода\
-//
-//
-//     */
-//    @Test
-//    fun `integration test - option one - controller`() {
-//        val commands = listOf(
-//            "5 5",
-//            "1 2 N",
-//            "LMLMLMLMM",
-//            "3 3 E",
-//            "MMRMMRMRRM"
-//        )
-//        val executor = MarsConttoller()
-//        commands.forEach { str ->  executor.execute(str) }
-//
-//        val coordinates = executor.getCoordinates()
-//        coordinates shouldContainExactly listOf("1 3 N", "5 1 E")
-//    }
-//
+    @Test
+    fun `integration test - option one - controller`() {
+        val commands = listOf(
+            "5 5",
+            "1 2 N",
+            "LMLMLMLMM",
+            "3 3 E",
+            "MMRMMRMRRM"
+        )
+        val context = TestDispatcherContext()
+        val executor = MarsController(
+            CreatePlateoUseCase(context, TestRoverIdGenerator()),
+            LandRoverUseCase(context),
+            DriveRoverUseCase(context)
+        )
+        commands.forEach { str ->  executor.execute(str) }
+
+        val coordinates = executor.getCoordinates()
+        coordinates shouldContainExactly listOf("2 3 N", "5 1 E")
+    }
+
     @Test
     fun `integration test - option two - use case`() {
         val dispatcherContext = TestDispatcherContext()
