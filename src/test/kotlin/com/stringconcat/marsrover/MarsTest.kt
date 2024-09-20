@@ -1,11 +1,12 @@
-import com.stringconcat.marsrover.Coordinate
+package com.stringconcat.marsrover
 
-//package com.stringconcat.marsrover
-//
-//import org.junit.jupiter.api.Test
-//
-//class MarsTest {
-//
+import arrow.core.getOrElse
+import io.kotest.matchers.equals.shouldBeEqual
+
+import org.junit.jupiter.api.Test
+
+class MarsTest {
+
 //    /*
 //    Пример тестового ввода:
 //5 5 ← верхний правый угол плато
@@ -49,37 +50,40 @@ import com.stringconcat.marsrover.Coordinate
 //        val useCase = RoverCommanderUseCase()
 //        val coordinates = useCase.execute(commands)
 //    }
-//
-//Набрести на доменную модель
-//    @Test
-//    fun `integration test - option three - domain`() {
-//        val plateo = Plateo(5, 5)
-//        val rover1 = Rover()
-//
-//        val dispatcher = Dispatcher(plateo)
-//            dispatcher.landRover()
-//
-//        val rover1 = plateo.landRover(rover1, Coordinate(1, 2), North)
-//        rover1.turnLeft()
-//        rover1.move()
-//            //..
-//
-//        val rover2 = plateo.landRover(3, 3, East)
-//        rover2.turnLeft()
-//        rover2.move()
-//
-//        rover1.coordinates() shouldBe ..
-//
-//
-//    }
-//}
 
-// TESTS
-// when rover lended on the correct coordinates then it returns current state
-// the rover can`t be landed outside of plato
-// the rover cannot be landed on occupied cell
+    @Test
+    fun `integration test - option three - domain`() {
+        val plateo = Plateo(Size(Width(5), Height(5)))
+        val dispatcher = Dispatcher(plateo)
 
-// rover cannot be moved outside of plato (ровер буксует и не падает за небесную твердь)
-// rover cannot be moved to occupied cell
+        val rover1 = dispatcher.landRover(Coordinate(1, 2), Direction.NORTH).getOrElse { null }
+        rover1?.turnLeft()
+        rover1?.move()
+        rover1?.turnLeft()
+        rover1?.move()
+        rover1?.turnLeft()
+        rover1?.move()
+        rover1?.turnLeft()
+        rover1?.move()
+        rover1?.move()
 
-// check corner cases
+        val rover2 = dispatcher.landRover(Coordinate(3, 3), Direction.EAST).getOrElse { null }
+        rover2?.move()
+        rover2?.move()
+        rover2?.turnRight()
+        rover2?.move()
+        rover2?.move()
+        rover2?.turnRight()
+        rover2?.move()
+        rover2?.turnRight()
+        rover2?.turnRight()
+        rover2?.move()
+
+        rover1?.coordinate?.shouldBeEqual(Coordinate(2, 3))
+        rover1?.direction?.shouldBeEqual(Direction.NORTH)
+
+        rover2?.coordinate?.shouldBeEqual(Coordinate(5, 1))
+        rover2?.direction?.shouldBeEqual(Direction.EAST)
+    }
+}
+

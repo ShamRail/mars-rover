@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    implementation("io.arrow-kt:arrow-core:1.0.0")
     testImplementation(kotlin("test"))
     testImplementation("io.kotest:kotest-runner-junit5-jvm:5.9.1")
 }

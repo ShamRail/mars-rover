@@ -1,6 +1,6 @@
 package com.stringconcat.marsrover
 
-class Rover(
+open class Rover(
     x: Int,
     y: Int,
     var direction: Direction
@@ -17,7 +17,7 @@ class Rover(
         }
     }
 
-    fun move() {
+    open fun move() {
         coordinate = nextCoordinate()
     }
 
