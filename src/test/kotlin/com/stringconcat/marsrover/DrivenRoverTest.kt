@@ -9,7 +9,7 @@ class DrivenRoverTest {
     @Test
     fun `when move to free coordinate then rover change coordinate`() {
         val plateo = Plateo(Size(Width(5), Height(5)))
-        val dispatcher = Dispatcher(plateo)
+        val dispatcher = Dispatcher(plateo, TestRoverIdGenerator())
         val rover = dispatcher.landRover(Coordinate(2, 2), Direction.NORTH).getOrElse { null }
         rover?.move()
         rover?.coordinate?.shouldBeEqual(Coordinate(2, 3))
@@ -18,7 +18,7 @@ class DrivenRoverTest {
     @Test
     fun `when move to outside plateo then rover DONT change coordinate`() {
         val plateo = Plateo(Size(Width(5), Height(5)))
-        val dispatcher = Dispatcher(plateo)
+        val dispatcher = Dispatcher(plateo, TestRoverIdGenerator())
         val rover = dispatcher.landRover(Coordinate(5, 5), Direction.NORTH).getOrElse { null }
         rover?.move()
         rover?.coordinate?.shouldBeEqual(Coordinate(5, 5))
@@ -27,7 +27,7 @@ class DrivenRoverTest {
     @Test
     fun `when move to occupied coordinate then rover DONT change coordinate`() {
         val plateo = Plateo(Size(Width(5), Height(5)))
-        val dispatcher = Dispatcher(plateo)
+        val dispatcher = Dispatcher(plateo, TestRoverIdGenerator())
         dispatcher.landRover(Coordinate(2, 2), Direction.NORTH)
         val rover = dispatcher.landRover(Coordinate(2, 1), Direction.NORTH).getOrElse { null }
         rover?.move()

@@ -1,6 +1,7 @@
 package com.stringconcat.marsrover
 
 open class Rover(
+    val id: RoverId,
     x: Int,
     y: Int,
     var direction: Direction

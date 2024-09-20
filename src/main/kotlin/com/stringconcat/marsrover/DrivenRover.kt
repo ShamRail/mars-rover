@@ -2,7 +2,8 @@ package com.stringconcat.marsrover
 
 class DrivenRover(
     private val dispatcher: Dispatcher,
-    x: Int, y: Int, direction: Direction) : Rover(x, y, direction) {
+    id: RoverId,
+    x: Int, y: Int, direction: Direction) : Rover(id, x, y, direction) {
 
     override fun move() {
         val nextCoordinate = nextCoordinate()
