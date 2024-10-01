@@ -24,7 +24,7 @@ class Dispatcher(val plateo: Plateo, private val roverIdGenerator: RoverIdGenera
         val id = roverIdGenerator.generate()
         val rover = DrivenRover(
             this, id,
-            coordinate.x, coordinate.y, direction
+            coordinate, direction
         )
         rovers[id] = rover
         return rover.right()

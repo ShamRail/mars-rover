@@ -6,12 +6,9 @@ import com.stringconcat.marsrover.domain.value.RoverId
 
 open class Rover(
     val id: RoverId,
-    x: Int,
-    y: Int,
+    var coordinate: Coordinate,
     var direction: Direction
 ) {
-
-    var coordinate = Coordinate(x, y)
 
     fun nextCoordinate(): Coordinate {
         return when (direction) {
