@@ -11,12 +11,7 @@ open class Rover(
 ) {
 
     fun nextCoordinate(): Coordinate {
-        return when (direction) {
-            Direction.SOUTH -> coordinate.decY()
-            Direction.NORTH -> coordinate.incY()
-            Direction.EAST -> coordinate.incX()
-            Direction.WEST -> coordinate.decX()
-        }
+        return coordinate.move(direction.delta())
     }
 
     open fun move() {

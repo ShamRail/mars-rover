@@ -11,4 +11,8 @@ data class Coordinate(
     fun decX() = Coordinate(x.dec(), y)
     fun incY() = Coordinate(x, y.inc())
     fun decY() = Coordinate(x, y.dec())
+
+    fun move(delta: Delta): Coordinate {
+        return Coordinate(x + delta.dx, y + delta.dy)
+    }
 }
