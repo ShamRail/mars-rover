@@ -24,20 +24,10 @@ open class Rover(
     }
 
     fun turnLeft() {
-        direction = when (direction) {
-            Direction.NORTH -> Direction.WEST
-            Direction.WEST-> Direction.SOUTH
-            Direction.SOUTH-> Direction.EAST
-            Direction.EAST-> Direction.NORTH
-        }
+        direction = direction.turnLeft()
     }
 
     fun turnRight() {
-        direction = when (direction) {
-            Direction.NORTH -> Direction.EAST
-            Direction.EAST -> Direction.SOUTH
-            Direction.SOUTH -> Direction.WEST
-            Direction.WEST -> Direction.NORTH
-        }
+        direction = direction.turnRight()
     }
 }
